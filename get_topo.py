@@ -1,6 +1,6 @@
 """
 Retreive topo and dtopo files needed for Crescent City simulations.
-
+With the option of using UW servers or AWS-S3 storage
 """
 
 import os,sys
