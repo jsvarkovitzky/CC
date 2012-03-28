@@ -6,8 +6,8 @@ required for the Crescent City Simulations
 import boto
 from boto.s3.key import Key
 from boto.s3.connection import Location
-import keys
 import os, sys
+import ../keys
 
 ###########################
 ## Find Specified Bucket ##
