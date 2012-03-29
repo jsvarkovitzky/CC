@@ -45,7 +45,8 @@ k = Key(bucket)
 file_list = bucket.get_all_keys()
 
 # Make etopo dir
-CCdir = '/home/jonathan/research/aws_automation'
+#CCdir = '/home/jonathan/research/aws_automation'
+CCdir = '/claw/clawpack-4.x/CC'
 subdir = 'topo/etopo'
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
