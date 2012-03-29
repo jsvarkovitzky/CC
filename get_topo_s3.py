@@ -76,7 +76,7 @@ fname = 'cc-1_3sec-c.asc'
 download_file(fname,bucket_name)
 
 # Download dtopo files into their directory
-subdir ='dtopo/tohuku'
+subdir ='dtopo/tohoku'
 os.chdir(CCdir)
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
