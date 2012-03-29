@@ -51,6 +51,8 @@ subdir = 'topo/etopo'
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
 
+print "Downloading etopo files to %r"%subdir
+
 # Download etopo files into their directory
 fname = 'etopo1min139E147E34N41N.asc'
 download_file(fname,bucket_name)
@@ -63,7 +65,7 @@ subdir = 'topo/CC'
 os.chdir(CCdir)
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
-
+print "Downloading topo files to %r"%subdir
 fname = 'ca_north36secm.asc'
 download_file(fname,bucket_name)
 
@@ -78,7 +80,7 @@ subdir ='dtopo/tohuku'
 os.chdir(CCdir)
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
-
+print "Downloading dtopo files to %r"%subdir
 fname = 'ucsb3-1min.tt1'
 download_file(fname,bucket_name)
 
