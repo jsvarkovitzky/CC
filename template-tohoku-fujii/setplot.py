@@ -110,8 +110,8 @@ def setplot(plotdata):
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.amr_gridedges_show = [1]
-    plotaxes.xlimits = [132,238] 
-    plotaxes.ylimits = [30,50]
+    plotaxes.xlimits = [132,250] 
+    plotaxes.ylimits = [22,52]
     #plotaxes.afteraxes = addgauges
 
     # Add contour lines of bathymetry:
@@ -173,8 +173,8 @@ def setplot(plotdata):
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
     plotitem.amr_gridedges_show = [1]
-    plotaxes.xlimits = [227,237] 
-    plotaxes.ylimits = [35,45]
+    plotaxes.xlimits = [234,250] 
+    plotaxes.ylimits = [22,52]
     def af(current_data):
         from pylab import savefig,figure
         figure(10)
@@ -299,9 +299,9 @@ def setplot(plotdata):
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
-    plotaxes.xlimits = [9*3600, 13*3600]
+    plotaxes.xlimits = [9*3600, 19*3600]
     #plotaxes.xlimits = [8*3600, 15*3600]
-    plotaxes.ylimits = 'auto'
+    plotaxes.ylimits = [-0.5,0.5]
     plotaxes.title = 'Surface'
 
     # Plot surface as blue curve:

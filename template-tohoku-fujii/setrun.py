@@ -69,15 +69,15 @@ def setrun(claw_pkg='geoclaw'):
 
     # Lower and upper edge of computational domain:
     clawdata.xlower = 132.
-    clawdata.xupper = 238.
+    clawdata.xupper = 250.
 
-    clawdata.ylower = 30
-    clawdata.yupper = 50.
+    clawdata.ylower = 22
+    clawdata.yupper = 52.
 
 
     # Number of grid cells:
-    clawdata.mx = 53
-    clawdata.my = 10
+    clawdata.mx = 59
+    clawdata.my = 15
 
 
     # ---------------
@@ -122,8 +122,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
         from numpy import arange, linspace
-        clawdata.tout = list(linspace(3600*1,3600*9,9)) + \
-                        list(linspace(3600*9.5,3600*11.5,13)) 
+        clawdata.tout = list(linspace(3600*9,3600*19,80))
         clawdata.nout = len(clawdata.tout)
 
     elif clawdata.outstyle == 3:
@@ -219,7 +218,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 6
+    mxnest = 5
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -278,7 +277,7 @@ def setgeo(rundata):
     geodata.drytolerance = 1.e-3
     geodata.wavetolerance = 2.e-2
     geodata.depthdeep = 1.e2
-    geodata.maxleveldeep = 4
+    geodata.maxleveldeep = 3
     geodata.ifriction = 1
     geodata.coeffmanning =.025
     geodata.frictiondepth = 100.
@@ -329,6 +328,7 @@ def setgeo(rundata):
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     geodata.regions.append([1, 1, 0., 1e9, 0, 360, -90, 90])   # whole world
     geodata.regions.append([3, 3, 0., 1800, 140, 146, 30, 42]) # source area
+    geodata.regions.append([3, 5, 9.*3600, 1e9, 235, 250, 22, 52]) # CA Coast 
     geodata.regions.append([1, 3, 0, 7200, 140, 245, 25, 50]) 
     geodata.regions.append([1, 3, 0, 15000, 155, 245, 25, 50]) 
     geodata.regions.append([1, 3, 15000, 21000, 170, 245, 25, 50]) 
@@ -350,8 +350,9 @@ def setgeo(rundata):
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     if 1:
-        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
-        geodata.gauges.append([197501, 235.81581, 41.745928, 33000., 1.e10]) ##tide gauge W
+        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
+#        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
+#        geodata.gauges.append([197501, 235.81581, 41.745928, 33000., 1.e10]) ##tide gauge W
 
     # The next part set up ngauges gauges along a transect between 
     # (x1,y1) and (x2,y2):
@@ -376,8 +377,8 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
-    geodata.fixedgrids.append([9.5*3600.,11.5*3600., 61, 235.8,235.82,\
-       41.735,41.755,217,217,0,1])
+#    geodata.fixedgrids.append([9.5*3600.,11.5*3600., 61, 235.8,235.82,\
+#       41.735,41.755,217,217,0,1])
     
 
     return rundata
