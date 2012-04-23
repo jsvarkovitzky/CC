@@ -19,7 +19,7 @@ def setplotfg(fgno=1, outdir='_output'):
     etamax = 1.0  
 
     fgdata = plotfg.ClawPlotFGData()
-
+    fgdata.format = 'binary'
     # Set attributes as desired:
 
     fgdata.outdir = outdir
@@ -58,7 +58,7 @@ def setplotfg(fgno=1, outdir='_output'):
         fgdata.inundated_add_colorbar = True
 
         # For plot of exposed seafloor:
-        fgdata.seafloor_show = True
+        fgdata.seafloor_show = False
         fgdata.seafloor_cmap =  geoplot.seafloor_colormap
         fgdata.seafloor_clim = (-1,0)
 

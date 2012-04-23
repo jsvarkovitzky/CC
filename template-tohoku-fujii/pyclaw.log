@@ -1,0 +1,40 @@
+2012-04-23 11:30:18,385 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0000 or ./fort.a
+2012-04-23 11:30:18,385 io INFO CLAW: 1335 - Read in solution for time t=0.0
+2012-04-23 11:34:19,416 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0001 or ./fort.a
+2012-04-23 11:34:19,416 io INFO CLAW: 1335 - Read in solution for time t=32400.0
+2012-04-23 11:40:10,292 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0002 or ./fort.a
+2012-04-23 11:40:10,292 io INFO CLAW: 1335 - Read in solution for time t=32861.538
+2012-04-23 11:46:30,840 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0003 or ./fort.a
+2012-04-23 11:46:30,840 io INFO CLAW: 1335 - Read in solution for time t=33323.077
+2012-04-23 11:52:53,391 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0004 or ./fort.a
+2012-04-23 11:52:53,391 io INFO CLAW: 1335 - Read in solution for time t=33784.615
+2012-04-23 11:59:23,923 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0005 or ./fort.a
+2012-04-23 11:59:23,924 io INFO CLAW: 1335 - Read in solution for time t=34246.154
+2012-04-23 12:06:01,993 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0006 or ./fort.a
+2012-04-23 12:06:01,994 io INFO CLAW: 1335 - Read in solution for time t=34707.692
+2012-04-23 12:12:46,241 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0007 or ./fort.a
+2012-04-23 12:12:46,241 io INFO CLAW: 1335 - Read in solution for time t=35169.231
+2012-04-23 12:19:11,818 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0008 or ./fort.a
+2012-04-23 12:19:11,819 io INFO CLAW: 1335 - Read in solution for time t=35630.769
+2012-04-23 12:25:40,455 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0009 or ./fort.a
+2012-04-23 12:25:40,455 io INFO CLAW: 1335 - Read in solution for time t=36092.308
+2012-04-23 12:32:17,928 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0010 or ./fort.a
+2012-04-23 12:32:17,929 io INFO CLAW: 1335 - Read in solution for time t=36553.846
+2012-04-23 12:39:03,251 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0011 or ./fort.a
+2012-04-23 12:39:03,251 io INFO CLAW: 1335 - Read in solution for time t=37015.385
+2012-04-23 12:45:48,268 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0012 or ./fort.a
+2012-04-23 12:45:48,268 io INFO CLAW: 1335 - Read in solution for time t=37476.923
+2012-04-23 12:52:41,666 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0013 or ./fort.a
+2012-04-23 12:52:41,666 io INFO CLAW: 1335 - Read in solution for time t=37938.462
+2012-04-23 12:59:15,980 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0014 or ./fort.a
+2012-04-23 12:59:15,980 io INFO CLAW: 1335 - Read in solution for time t=38400.0
+2012-04-23 13:06:17,956 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0015 or ./fort.a
+2012-04-23 13:06:17,956 io INFO CLAW: 1335 - Read in solution for time t=38861.538
+2012-04-23 13:13:12,118 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0016 or ./fort.a
+2012-04-23 13:13:12,139 io INFO CLAW: 1335 - Read in solution for time t=39323.077
+2012-04-23 13:20:40,252 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0017 or ./fort.a
+2012-04-23 13:20:40,501 io INFO CLAW: 1335 - Read in solution for time t=39784.615
+2012-04-23 13:27:57,114 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0018 or ./fort.a
+2012-04-23 13:27:57,133 io INFO CLAW: 1335 - Read in solution for time t=40246.154
+2012-04-23 13:35:06,956 io INFO CLAW: 320 - Unable to open auxillary file ./fort.a0019 or ./fort.a
+2012-04-23 13:35:06,975 io INFO CLAW: 1335 - Read in solution for time t=40707.692

@@ -57,6 +57,7 @@ CLAW_LIBSOURCES = \
   $(GEOLIB)/stepgrid_geo.f \
   $(GEOLIB)/fgridinterp_geo.f \
   $(GEOLIB)/fgridout_geo.f \
+  $(GEOLIB)/fgridout_binary_geo.f90 \
   $(GEOLIB)/rpn2ez_geo.f \
   $(GEOLIB)/riemannsolvers_geo.f \
   $(GEOLIB)/rpt2_geo.f \

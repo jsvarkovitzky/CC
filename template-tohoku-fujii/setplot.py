@@ -230,7 +230,7 @@ def setplot(plotdata):
     # Figure for zoom2
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Crescent City', figno=11)
-    plotfigure.show = False
+    #plotfigure.show = False
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()

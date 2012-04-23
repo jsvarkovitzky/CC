@@ -122,7 +122,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
         from numpy import arange, linspace
-        clawdata.tout = list(linspace(3600*9,3600*19,80))
+        clawdata.tout = list(linspace(3600*9,3600*12,40))
         clawdata.nout = len(clawdata.tout)
 
     elif clawdata.outstyle == 3:
@@ -218,7 +218,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 5
+    mxnest = 6
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -340,11 +340,11 @@ def setgeo(rundata):
     #geodata.regions.append([2, 4, 33000, 1e9, 230, 245, 35, 43]) 
     #geodata.regions.append([4, 4, 33000, 1e9, 235, 236, 41, 42]) 
 
-#    geodata.regions.append([3, 4, 33000., 1e9, 228, 238, 41, 42]) # between shelf and CC
-#    geodata.regions.append([4, 4, 33000., 1e9, 235, 236, 41, 42]) # CC region
+    geodata.regions.append([3, 4, 33000., 1e9, 228, 238, 41, 42]) # between shelf and CC
+    geodata.regions.append([4, 4, 33000., 1e9, 235, 236, 41, 42]) # CC region
     geodata.regions.append([5, 5, 33000., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
-    geodata.regions.append([6, 6, 35000., 1e9, 235.795116,235.826887,41.734963,41.752605]) #only harbor 
-
+#    geodata.regions.append([6, 6, 35000., 1e9, 235.795116,235.826887,41.734963,41.752605]) #only harbor 
+    geodata.regions.append([6, 6, 35000., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
     
     # == setgauges.data values ==
     geodata.gauges = []
@@ -377,8 +377,10 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
-#    geodata.fixedgrids.append([9.5*3600.,11.5*3600., 61, 235.8,235.82,\
+#    geodata.fixedgrids.append([9.0*3600.,14.0*3600., 40, 235.8,235.82,\
 #       41.735,41.755,217,217,0,1])
+    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
+       41.735,41.755,434,217,0,1])
     
 
     return rundata
