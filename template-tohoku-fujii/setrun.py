@@ -1,5 +1,5 @@
 """
- For Tohoku 2011 tsunami from source region to California.
+For Tohoku 2011 tsunami from source region to California.
 Run with this first and then restart using setrun2.py.
 
 Module to set up run time parameters for Clawpack.
