@@ -16,10 +16,10 @@ def setplotfg(fgno=1, outdir='_output'):
     from numpy import arange
 
     # max used for surface and inundation colormaps below:
-    etamax = 1.0  
+    etamax = 5.0  
 
     fgdata = plotfg.ClawPlotFGData()
-    fgdata.format = 'binary'
+    #xfgdata.format = 'binary'
     # Set attributes as desired:
 
     fgdata.outdir = outdir
@@ -45,6 +45,7 @@ def setplotfg(fgno=1, outdir='_output'):
         fgdata.water_cmap =  my_cmap_surface
         fgdata.water_clim = (-etamax,etamax)
 
+
         fgdata.land_cmap =  geoplot.land_colors
         fgdata.land_clim = (0,40)
 
@@ -58,7 +59,7 @@ def setplotfg(fgno=1, outdir='_output'):
         fgdata.inundated_add_colorbar = True
 
         # For plot of exposed seafloor:
-        fgdata.seafloor_show = False
+        fgdata.seafloor_show = True
         fgdata.seafloor_cmap =  geoplot.seafloor_colormap
         fgdata.seafloor_clim = (-1,0)
 
