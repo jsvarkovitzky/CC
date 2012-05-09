@@ -109,8 +109,8 @@ def setplot(plotdata):
     plotitem.imshow_cmax = 100.0
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
-    plotaxes.xlimits = [132,250] 
+    plotitem.amr_gridedges_show = [0]
+    plotaxes.xlimits = [220,250] 
     plotaxes.ylimits = [22,52]
     #plotaxes.afteraxes = addgauges
 
@@ -158,11 +158,11 @@ def setplot(plotdata):
                                        0.1: [1.0,0.5,0.5], \
                                        1.0: [1.0,0.0,0.0]})
     plotitem.imshow_cmap = my_cmap
-    plotitem.imshow_cmin = -0.3
-    plotitem.imshow_cmax = 0.3
+    plotitem.imshow_cmin = -3.0
+    plotitem.imshow_cmax = 3.0
     plotitem.add_colorbar = True
     plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
+    plotitem.amr_gridedges_show = [0]
 
     # Land
     plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
@@ -172,9 +172,9 @@ def setplot(plotdata):
     plotitem.imshow_cmax = 100.0
     plotitem.add_colorbar = False
     plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
-    plotaxes.xlimits = [234,250] 
-    plotaxes.ylimits = [22,52]
+    plotitem.amr_gridedges_show = [0]
+    plotaxes.xlimits = [230,240] 
+    plotaxes.ylimits = [35,52]
     def af(current_data):
         from pylab import savefig,figure
         figure(10)
@@ -230,7 +230,7 @@ def setplot(plotdata):
     # Figure for zoom2
     #-----------------------------------------
     plotfigure = plotdata.new_plotfigure(name='Crescent City', figno=11)
-    #plotfigure.show = False
+    plotfigure.show = False
 
     # Set up for axes in this figure:
     plotaxes = plotfigure.new_plotaxes()
@@ -279,7 +279,7 @@ def setplot(plotdata):
 
     # Add contour lines of topography:
     plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.show = False
+    #plotitem.show = False
     plotitem.plot_var = geoplot.topo
     from numpy import arange, linspace
     plotitem.contour_levels = arange(0., 11., 1.)
