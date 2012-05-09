@@ -68,7 +68,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.ndim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.xlower = 132.
+    clawdata.xlower = 220.
     clawdata.xupper = 250.
 
     clawdata.ylower = 22
@@ -76,7 +76,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # Number of grid cells:
-    clawdata.mx = 59
+    clawdata.mx = 15
     clawdata.my = 15
 
 
@@ -116,8 +116,8 @@ def setrun(claw_pkg='geoclaw'):
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
-        clawdata.nout = 1
-        clawdata.tfinal = 0.5*3600.
+        clawdata.nout = 60
+        clawdata.tfinal = 1*3600.
 
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
@@ -218,13 +218,13 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 4
+    mxnest = 6
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    clawdata.inratx = [4,4,5,5,27]
-    clawdata.inraty = [4,4,5,5,27]
+    clawdata.inratx = [4,4,5,5,18]
+    clawdata.inraty = [4,4,5,5,18]
     clawdata.inratt = [4,4,5,2,2]
 
 
@@ -302,11 +302,11 @@ def setgeo(rundata):
     fname = topodir + '/cc-1sec-c.asc'
     geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
      
-    fname = topodir + '/cc-1_3sec-c.asc'
-    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
+#    fname = topodir + '/cc-1_3sec-c.asc'
+#    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
 
-    fname = topodir + '/crescent_city_1-3_arc-second_mhw.asc'
-    geodata.topofiles.append([3, 1, 1, 32000, 1.e10, fname])  
+#    fname = topodir + '/crescent_city_1-3_arc-second_mhw.asc'
+#    geodata.topofiles.append([3, 1, 1, 32000, 1.e10, fname])  
 
      
 #    fname = topodir + '/crescent_city_1-3_arc-second_mhw-649x541.asc'
@@ -317,8 +317,14 @@ def setgeo(rundata):
     geodata.dtopofiles = []
     # for moving topography, append lines of the form :   
     #    [minlevel, maxlevel, fname]
-    dtopodir = CCdir + '/dtopo/tohoku'
-    fname = dtopodir + '/fujii.txydz'
+    ## Tohoku Source
+#    dtopodir = CCdir + '/dtopo/tohoku'
+#    fname = dtopodir + '/fujii.txydz'
+#    print 'dtopo file: ',fname
+#    geodata.dtopofiles.append([1,3,3,fname])
+    ## CSZ Source
+    dtopodir = CCdir + '/dtopo/CSZ'
+    fname = dtopodir + '/csz01.dtopo'
     print 'dtopo file: ',fname
     geodata.dtopofiles.append([1,3,3,fname])
 
@@ -334,7 +340,8 @@ def setgeo(rundata):
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     geodata.regions.append([1, 1, 0., 1e9, 0, 360, -90, 90])   # whole world
     geodata.regions.append([3, 3, 0., 1800, 140, 146, 30, 42]) # source area
-    geodata.regions.append([3, 5, 9.*3600, 1e9, 235, 250, 22, 52]) # CA Coast 
+    geodata.regions.append([3, 5, 0.*3600, 1e9, 230, 250, 22, 52]) # CA Coast 
+#    geodata.regions.append([3, 5, 0.*3600, 1e9, 235, 250, 22, 52]) # CA Coast 
     geodata.regions.append([1, 3, 0, 7200, 140, 245, 25, 50]) 
     geodata.regions.append([1, 3, 0, 15000, 155, 245, 25, 50]) 
     geodata.regions.append([1, 3, 15000, 21000, 170, 245, 25, 50]) 
@@ -346,13 +353,14 @@ def setgeo(rundata):
     #geodata.regions.append([2, 4, 33000, 1e9, 230, 245, 35, 43]) 
     #geodata.regions.append([4, 4, 33000, 1e9, 235, 236, 41, 42]) 
 
-    geodata.regions.append([3, 4, 33000., 1e9, 228, 238, 41, 42]) # between shelf and CC
-    geodata.regions.append([4, 4, 33000., 1e9, 235, 236, 41, 42]) # CC region
+    geodata.regions.append([3, 4, 0., 1e9, 228, 238, 41, 42]) # between shelf and CC
+    geodata.regions.append([4, 4, 0., 1e9, 235, 236, 41, 42]) # CC region
     geodata.regions.append([5, 5, 0., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
 #    geodata.regions.append([5, 5, 33000., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
 #    geodata.regions.append([6, 6, 35000., 1e9, 235.795116,235.826887,41.734963,41.752605]) #only harbor 
 #    geodata.regions.append([6, 6, 35000., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
     geodata.regions.append([6, 6, 0., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
+
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
@@ -384,8 +392,8 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
-    geodata.fixedgrids.append([0.0*3600.,0.5*3600., 5, 235.78,235.82,\
-       41.735,41.755,217,217,0,1])
+    geodata.fixedgrids.append([0.0*3600.,1*3600., 61, 235.78,235.82,\
+       41.735,41.755,217,108,0,1])
 #    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
 #       41.735,41.755,434,217,0,1])
     
