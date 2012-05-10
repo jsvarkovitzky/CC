@@ -359,7 +359,11 @@ def setgeo(rundata):
 #    geodata.regions.append([5, 5, 33000., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
 #    geodata.regions.append([6, 6, 35000., 1e9, 235.795116,235.826887,41.734963,41.752605]) #only harbor 
 #    geodata.regions.append([6, 6, 35000., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
+<<<<<<< HEAD
     geodata.regions.append([6, 6, 0., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
+=======
+    geodata.regions.append([6, 6, 0., 1e9, 235.77,235.84,41.73,41.79]) # fixed grid domain 
+>>>>>>> 0dc302fa9d074ff6e76428ff5a623f019dea23d7
 
     # == setgauges.data values ==
     geodata.gauges = []
@@ -392,8 +396,13 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
+<<<<<<< HEAD
     geodata.fixedgrids.append([0.0*3600.,1*3600., 61, 235.78,235.82,\
        41.735,41.755,217,108,0,1])
+=======
+    geodata.fixedgrids.append([0.0*3600.,1*3600., 61, 235.77,235.84,\
+       41.73,41.79,490,420,0,1])
+>>>>>>> 0dc302fa9d074ff6e76428ff5a623f019dea23d7
 #    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
 #       41.735,41.755,434,217,0,1])
     
