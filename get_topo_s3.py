@@ -75,20 +75,34 @@ download_file(fname,bucket_name)
 fname = 'cc-1_3sec-c.asc'
 download_file(fname,bucket_name)
 
-fname = 'crescent_city_1-3_arc-second_mhw.asc'
-download_file(fname,bucket_name)
+#fname = 'crescent_city_1-3_arc-second_mhw.asc'
+#download_file(fname,bucket_name)
 
 # Download dtopo files into their directory
 subdir ='dtopo/tohoku'
 os.chdir(CCdir)
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
+
+#Download Tohoku 2011 Source
 print "Downloading dtopo files to %r"%subdir
 fname = 'ucsb3-1min.tt1'
 download_file(fname,bucket_name)
 
 fname = 'fujii.txydz'
 download_file(fname,bucket_name)
+
+#Download CSZ01 Source
+subdir ='dtopo/CSZ'
+os.chdir(CCdir)
+os.system('mkdir -p %s'%subdir)
+os.chdir(subdir)
+
+print "Downloading dtopo files to %r"%subdir
+fname = 'csz01.dtopo'
+download_file(fname,bucket_name)
+
+
 
 ##
 #topo_files = ([
