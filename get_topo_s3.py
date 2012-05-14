@@ -46,7 +46,7 @@ file_list = bucket.get_all_keys()
 
 # Make etopo dir
 #CCdir = '/home/jonathan/research/aws_automation'
-CCdir = '/claw/clawpack-4.x/CC'
+CCdir = '/home/ubuntu/CC'
 subdir = 'topo/etopo'
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
@@ -73,6 +73,9 @@ fname = 'cc-1sec-c.asc'
 download_file(fname,bucket_name)
 
 fname = 'cc-1_3sec-c.asc'
+download_file(fname,bucket_name)
+
+fname = 'crescent_city_1-3_arc-second_mhw.asc'
 download_file(fname,bucket_name)
 
 # Download dtopo files into their directory
