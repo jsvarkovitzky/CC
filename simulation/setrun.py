@@ -13,6 +13,7 @@ import os
 from pyclaw import data
 import numpy as np
 
+
 # Top CC directory (should have subdirectories topo and dtopo):
 CCdir = os.path.abspath('..')
 
@@ -324,7 +325,7 @@ def setgeo(rundata):
 #    geodata.dtopofiles.append([1,3,3,fname])
     ## CSZ Source
     dtopodir = CCdir + '/dtopo/CSZ'
-    fname = dtopodir + '/csz01.dtopo'
+    fname = dtopodir + '/' + driver.source
     print 'dtopo file: ',fname
     geodata.dtopofiles.append([1,3,3,fname])
 
@@ -407,6 +408,8 @@ def setgeo(rundata):
 if __name__  == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
+    import driver_import
+    driver = driver_import.driver_info(1)
     if len(sys.argv) == 2:
         rundata = setrun(sys.argv[1])
     else:
