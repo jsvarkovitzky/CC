@@ -9,10 +9,15 @@ that will be read in by the Fortran code.
 
 """
 
-import os
+import os, sys
 from pyclaw import data
 import numpy as np
+lib_path = os.path.abspath('../../')
+sys.path.append(lib_path)
+import user_info_file
+sim_path = os.path.abspath('CC/simulation')
 
+user = user_info_file.user_info()
 
 # Top CC directory (should have subdirectories topo and dtopo):
 CCdir = os.path.abspath('..')
