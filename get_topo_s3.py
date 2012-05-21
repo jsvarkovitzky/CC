@@ -8,7 +8,12 @@ from boto.s3.key import Key
 from boto.s3.connection import Location
 import os, sys
 import keys
-import /home/ubuntu/user_info_file
+
+iiiimport os, sys
+lib_path = os.path.abspath('../')
+sys.path.append(lib_path)
+import user_info_file
+
 user = user_info_file.user_info()
 
 ###########################
