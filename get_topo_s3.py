@@ -8,6 +8,8 @@ from boto.s3.key import Key
 from boto.s3.connection import Location
 import os, sys
 import keys
+import ~/home/ubunut/user_info_file
+user = user_info_file.user_info()
 
 ###########################
 ## Find Specified Bucket ##
@@ -37,7 +39,7 @@ AWS_ACCESS_KEY_ID = keys.aws_key('access')
 AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
 
 conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
-bucket_name = 'cc_topos'
+bucket_name = user.topo_bucket
 bucket = find_s3_bucket(conn, bucket_name)
 k = Key(bucket)
 
