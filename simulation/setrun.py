@@ -18,11 +18,11 @@ from numpy import genfromtxt
 lib_path = os.path.abspath('../../')
 sys.path.append(lib_path)
 import user_info_file
-import driver_importer
+import driver_import
 sim_path = os.path.abspath('CC/simulation')
 
 user = user_info_file.user_info()
-driver = driver_info(1)
+driver = driver_import.driver_info(1)
 # Top CC directory (should have subdirectories topo and dtopo):
 CCdir = os.path.abspath('..')
 
@@ -228,7 +228,7 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # max number of refinement levels:
-    mxnest = 6
+    mxnest = driver.mxnest
 
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
@@ -298,7 +298,7 @@ def setgeo(rundata):
     # for topography, append lines of the form
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
-    topodir = CCdir + '/topo'
+    topodir = CCdir + '/topo/'
     topo_list = '/home/ubuntu/topo_list.csv'
     topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
     #Read through row wise in csv file to extract relavent geodata
