@@ -12,6 +12,9 @@ that will be read in by the Fortran code.
 import os, sys
 from pyclaw import data
 import numpy as np
+import csv
+from numpy import genfromtxt
+
 lib_path = os.path.abspath('../../')
 sys.path.append(lib_path)
 import user_info_file
@@ -296,6 +299,14 @@ def setgeo(rundata):
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
     topodir = CCdir + '/topo'
+    topo_list = '/home/ubuntu/topo_list.csv'
+    topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
+    #Read through row wise in csv file to extract relavent geodata
+    for row in topo_block:
+        fname = topodir + row[0]
+        geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], row[0]])
+    
+    """
     fname = topodir + '/etopo1min139E147E34N41N.asc'
     geodata.topofiles.append([3, 1, 1, 0., 1.e10, fname])
     
@@ -310,7 +321,7 @@ def setgeo(rundata):
      
     fname = topodir + '/cc-1_3sec-c.asc'
     geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
-
+    """
 #    fname = topodir + '/crescent_city_1-3_arc-second_mhw.asc'
 #    geodata.topofiles.append([3, 1, 1, 32000, 1.e10, fname])  
 
