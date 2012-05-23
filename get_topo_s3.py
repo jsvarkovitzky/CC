@@ -8,7 +8,7 @@ from boto.s3.connection import Location
 import os, sys
 import keys
 import csv
-
+from numpy import genfromtxt
 import os, sys
 lib_path = os.path.abspath('../')
 sys.path.append(lib_path)
