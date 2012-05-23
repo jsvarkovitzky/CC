@@ -2,12 +2,12 @@
 Retreive topo and dtopo files that are stored on the s3 server that are
 required for the Crescent City Simulations
 """
-#Changed?
 import boto
 from boto.s3.key import Key
 from boto.s3.connection import Location
 import os, sys
 import keys
+import csv
 
 import os, sys
 lib_path = os.path.abspath('../')
@@ -54,12 +54,19 @@ file_list = bucket.get_all_keys()
 # Make etopo dir
 #CCdir = '/home/jonathan/research/aws_automation'
 CCdir = '/home/ubuntu/CC'
-subdir = 'topo/etopo'
+subdir = 'topo'
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
 
-print "Downloading etopo files to %r"%subdir
+print "Downloading topo files to %r from AWS S3:"%subdir
 
+topo_list = '/home/ubuntu/topo_list.csv'
+topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
+
+for row in topo_block:
+    fname = row[0]
+    download_file(fname,bucket_name)
+"""
 # Download etopo files into their directory
 fname = 'etopo1min139E147E34N41N.asc'
 download_file(fname,bucket_name)
@@ -84,7 +91,7 @@ download_file(fname,bucket_name)
 
 #fname = 'crescent_city_1-3_arc-second_mhw.asc'
 #download_file(fname,bucket_name)
-
+"""
 # Download dtopo files into their directory
 subdir ='dtopo/tohoku'
 os.chdir(CCdir)

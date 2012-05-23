@@ -15,10 +15,11 @@ import numpy as np
 lib_path = os.path.abspath('../../')
 sys.path.append(lib_path)
 import user_info_file
+import driver_importer
 sim_path = os.path.abspath('CC/simulation')
 
 user = user_info_file.user_info()
-
+driver = driver_info(1)
 # Top CC directory (should have subdirectories topo and dtopo):
 CCdir = os.path.abspath('..')
 
@@ -294,14 +295,13 @@ def setgeo(rundata):
     # for topography, append lines of the form
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
-    topodir = CCdir + '/topo/etopo'
+    topodir = CCdir + '/topo'
     fname = topodir + '/etopo1min139E147E34N41N.asc'
     geodata.topofiles.append([3, 1, 1, 0., 1.e10, fname])
     
     fname = topodir +'/etopo4min120E72W40S60N.asc'
     geodata.topofiles.append([3, 1, 1, 0., 1.e10, fname])
  
-    topodir = CCdir + '/topo/CC'
     fname = topodir + '/ca_north36secm.asc'
     geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname]) 
     
