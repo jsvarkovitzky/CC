@@ -301,7 +301,8 @@ def setgeo(rundata):
     topodir = CCdir + '/topo/'
     topo_list = '/home/ubuntu/topo_list.csv'
     topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
-    Read through row wise in csv file to extract relavent geodata
+    #Read through row wise in csv file to extract relavent geodata
+    """
     for row in topo_block:
         fname = topodir + row[0]
         print "The file being read in is %s." %fname
@@ -322,7 +323,7 @@ def setgeo(rundata):
      
     fname = topodir + '/cc-1_3sec-c.asc'
     geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
-    """
+    
 #    fname = topodir + '/crescent_city_1-3_arc-second_mhw.asc'
 #    geodata.topofiles.append([3, 1, 1, 32000, 1.e10, fname])  
 
