@@ -304,6 +304,7 @@ def setgeo(rundata):
     #Read through row wise in csv file to extract relavent geodata
     for row in topo_block:
         fname = topodir + row[0]
+        print "The file being read in is %s." %fname
         geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], row[0]])
     
     """
