@@ -299,6 +299,7 @@ def setgeo(rundata):
     #    [topotype, minlevel, maxlevel, t1, t2, fname]
 
     topodir = CCdir + '/topo/'
+    print "The topo dir is %s."%topodir
     topo_list = '/home/ubuntu/topo_list.csv'
     topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
     #Read through row wise in csv file to extract relavent geodata
