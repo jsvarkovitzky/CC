@@ -10,6 +10,7 @@ from pyclaw.plotters.plotclaw import plotclaw
 # initialize rundata using setrun but then change some things for each run:     
 rundata = setrun()
 
-runclaw(xclawcmd = "xgeoclaw", outdir="_output_1level")
-plotclaw(outdir="_output_1level", plotdir="_plots_1level")
+runclaw(xclawcmd = "xgeoclaw", outdir="_output")
+plotclaw(outdir="_output", plotdir="_plots")
 
+upload_results()

@@ -62,7 +62,8 @@ bucket_name = user.topo_bucket
 bucket = find_s3_bucket(conn, bucket_name)
 k = Key(bucket)
 
-dirName = '_output'
-tar_name = tar_dir(dirName)
+dirName = ['_output','_plots']
 
-upload_file(tar_name,bucket)
+for i in range(0,len(dirName)):
+    tar_name = tar_dir(dirName[i])
+    upload_file(tar_name,bucket)
