@@ -14,6 +14,6 @@ rundata = setrun()
 #runclaw(xclawcmd = "xgeoclaw", outdir="_output")
 #plotclaw(outdir="_output", plotdir="_plots")
 
-os.system('make .output')
+os.system('make clean')
 os.system('make .plots')
 import upload_results
