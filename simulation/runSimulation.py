@@ -13,4 +13,4 @@ rundata = setrun()
 runclaw(xclawcmd = "xgeoclaw", outdir="_output")
 plotclaw(outdir="_output", plotdir="_plots")
 
-upload_results()
+import upload_results
