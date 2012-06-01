@@ -13,11 +13,8 @@ from upload_results import upload_results_s3
 
 now = datetime.datetime.now()
 # initialize rundata using setrun but then change some things for each run:     
-##rundata = setrun()
+rundata = setrun()
 
-#runclaw(xclawcmd = "xgeoclaw", outdir="_output")
-#plotclaw(outdir="_output", plotdir="_plots")
-
-##os.system('make clean')
-##os.system('make .plots')
+os.system('make clean')
+os.system('make .plots')
 upload_results_s3(now)
