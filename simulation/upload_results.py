@@ -21,7 +21,8 @@ user = user_info_file.user_info()
 
 def tar_dir(dir_name,now):
     print 'Compressing the %s directory.' %dir_name
-    timeStamp = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second)
+    timeStamp = time_stamp_format(now)
+    print "The timestamp is %s" %timeStamp
     tar_name = str(dir_name + '_' + timeStamp + '.tar')
     #tar_name = str(dir_name + '.tar')
     os.system('tar -czf' + repr(tar_name) + ' ' + repr(dir_name))
@@ -52,6 +53,14 @@ def find_s3_bucket(s3_conn, string):
 def percent_cb(complete, total):
     sys.stdout.write('.')
     sys.stdout.flush()
+
+###########################
+## Format Timestamp Text ##
+###########################
+
+def time_stamp_format(now):
+    timeStamp = str(now.year) + str('%02d'%now.month) + str('%02d'%now.day) + str('%02d'%now.hour) + str('%02d'%now.minute) + str('%02d'%now.second)    
+    return timeStamp
 ##################
 ## Main Program ##
 ##################
