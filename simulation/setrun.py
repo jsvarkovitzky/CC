@@ -302,46 +302,17 @@ def setgeo(rundata):
     topo_list = '/home/ubuntu/topo_list.csv'
     topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
     #Read through row wise in csv file to extract relavent geodata
-    """
     for row in topo_block:
         fname = topodir + row[0]
         print "The file being read in is %s." %fname
-        geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], row[0]])
+        geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], fname])
     
-    """
-    fname = topodir + '/etopo1min139E147E34N41N.asc'
-    geodata.topofiles.append([3, 1, 1, 0., 1.e10, fname])
-    
-    fname = topodir +'/etopo4min120E72W40S60N.asc'
-    geodata.topofiles.append([3, 1, 1, 0., 1.e10, fname])
- 
-    fname = topodir + '/ca_north36secm.asc'
-    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname]) 
-    
-    fname = topodir + '/cc-1sec-c.asc'
-    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
-     
-    fname = topodir + '/cc-1_3sec-c.asc'
-    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
-    
-#    fname = topodir + '/crescent_city_1-3_arc-second_mhw.asc'
-#    geodata.topofiles.append([3, 1, 1, 32000, 1.e10, fname])  
-
-     
-#    fname = topodir + '/crescent_city_1-3_arc-second_mhw-649x541.asc'
-#    geodata.topofiles.append([-3, 1, 1, 32000, 1.e10, fname])  
 
     # Earthquake source:
     # == setdtopo.data values ==
     geodata.dtopofiles = []
     # for moving topography, append lines of the form :   
     #    [minlevel, maxlevel, fname]
-    ## Tohoku Source
-#    dtopodir = CCdir + '/dtopo/tohoku'
-#    fname = dtopodir + '/fujii.txydz'
-#    print 'dtopo file: ',fname
-#    geodata.dtopofiles.append([1,3,3,fname])
-    ## CSZ Source
     dtopodir = CCdir + '/dtopo/CSZ'
     fname = dtopodir + '/' + driver.source
     print 'dtopo file: ',fname
