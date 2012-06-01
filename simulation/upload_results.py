@@ -60,7 +60,7 @@ AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
 conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
 
 dirName = ['_output','_plots']
-bucketName = [user.output_bucket,user.products_bucket]
+bucketName = [user.output_bucket,user.product_bucket]
 for i in range(0,len(dirName)):
     bucket = find_s3_bucket(conn, bucketName[i])
     k = Key(bucket)
