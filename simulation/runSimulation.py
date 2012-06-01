@@ -7,7 +7,10 @@ from setplot import setplot
 from pyclaw.runclaw import runclaw                                              
 from pyclaw.plotters.plotclaw import plotclaw                                   
 import os
-                                                                                
+import datetime
+import upload_results
+
+now = datetime.datetime.now()
 # initialize rundata using setrun but then change some things for each run:     
 rundata = setrun()
 
@@ -16,4 +19,4 @@ rundata = setrun()
 
 os.system('make clean')
 os.system('make .plots')
-import upload_results
+upload_results(now)

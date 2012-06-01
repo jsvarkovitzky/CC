@@ -19,9 +19,9 @@ user = user_info_file.user_info()
 ## tar provided directory ##
 ############################
 
-def tar_dir(dir_name):
+def tar_dir(dir_name,now):
     print 'Compressing the %s directory.' %dir_name
-    tar_name = str(dir_name + '.tar')
+    tar_name = str(dir_name + '_' + now.year + now.month + now.day + now.hour + now.minute + now.second + '.tar')
     os.system('tar -czf' + repr(tar_name) + ' ' + repr(dir_name))
     return tar_name
 ###########################
@@ -53,16 +53,16 @@ def percent_cb(complete, total):
 ##################
 ## Main Program ##
 ##################
+def upload_results(now):
+    AWS_ACCESS_KEY_ID = keys.aws_key('access')
+    AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
 
-AWS_ACCESS_KEY_ID = keys.aws_key('access')
-AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
-
-conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
-
-dirName = ['_output','_plots']
-bucketName = [user.output_bucket,user.product_bucket]
-for i in range(0,len(dirName)):
-    bucket = find_s3_bucket(conn, bucketName[i])
-    k = Key(bucket)
-    tar_name = tar_dir(dirName[i])
-    upload_file(tar_name,bucket)
+    conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
+    
+    dirName = ['_output','_plots']
+    bucketName = [user.output_bucket,user.product_bucket]
+    for i in range(0,len(dirName)):
+        bucket = find_s3_bucket(conn, bucketName[i])
+        k = Key(bucket)
+        tar_name = tar_dir(dirName[i],now)
+        upload_file(tar_name,bucket)
