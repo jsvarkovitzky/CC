@@ -8,15 +8,16 @@ from pyclaw.runclaw import runclaw
 from pyclaw.plotters.plotclaw import plotclaw                                   
 import os
 import datetime
-import upload_results
+from upload_results import upload_results_s3
+
 
 now = datetime.datetime.now()
 # initialize rundata using setrun but then change some things for each run:     
-rundata = setrun()
+##rundata = setrun()
 
 #runclaw(xclawcmd = "xgeoclaw", outdir="_output")
 #plotclaw(outdir="_output", plotdir="_plots")
 
-os.system('make clean')
-os.system('make .plots')
-upload_results(now)
+##os.system('make clean')
+##os.system('make .plots')
+upload_results_s3(now)

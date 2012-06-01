@@ -21,7 +21,8 @@ user = user_info_file.user_info()
 
 def tar_dir(dir_name,now):
     print 'Compressing the %s directory.' %dir_name
-    tar_name = str(dir_name + '_' + now.year + now.month + now.day + now.hour + now.minute + now.second + '.tar')
+    #    tar_name = str(dir_name + '_' + now.year + now.month + now.day + now.hour + now.minute + now.second + '.tar')
+    tar_name = str(dir_name + '.tar')
     os.system('tar -czf' + repr(tar_name) + ' ' + repr(dir_name))
     return tar_name
 ###########################
@@ -32,7 +33,7 @@ def upload_file(file_name, bucket_name):
     print 'Uploading %s to s3 storage bucket %r'%(file_name,bucket_name)
     k.key = file_name
     k.set_contents_from_filename(file_name,cb=percent_cb, num_cb=10)
-
+    
 ###########################
 ## Find Specified Bucket ##
 ###########################
@@ -53,12 +54,12 @@ def percent_cb(complete, total):
 ##################
 ## Main Program ##
 ##################
-def upload_results(now):
+def upload_results_s3(now):
     AWS_ACCESS_KEY_ID = keys.aws_key('access')
     AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
-
+        
     conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
-    
+        
     dirName = ['_output','_plots']
     bucketName = [user.output_bucket,user.product_bucket]
     for i in range(0,len(dirName)):
