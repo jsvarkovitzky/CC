@@ -21,15 +21,16 @@ user = user_info_file.user_info()
 
 def tar_dir(dir_name,now):
     print 'Compressing the %s directory.' %dir_name
-    #    tar_name = str(dir_name + '_' + now.year + now.month + now.day + now.hour + now.minute + now.second + '.tar')
-    tar_name = str(dir_name + '.tar')
+    timeStamp = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.minute) + str(now.second)
+    tar_name = str(dir_name + '_' + timeStamp + '.tar')
+    #tar_name = str(dir_name + '.tar')
     os.system('tar -czf' + repr(tar_name) + ' ' + repr(dir_name))
     return tar_name
 ###########################
 ## Upload tar file to s3 ##
 ###########################
 
-def upload_file(file_name, bucket_name):
+def upload_file(file_name, bucket_name,k):
     print 'Uploading %s to s3 storage bucket %r'%(file_name,bucket_name)
     k.key = file_name
     k.set_contents_from_filename(file_name,cb=percent_cb, num_cb=10)
@@ -66,4 +67,4 @@ def upload_results_s3(now):
         bucket = find_s3_bucket(conn, bucketName[i])
         k = Key(bucket)
         tar_name = tar_dir(dirName[i],now)
-        upload_file(tar_name,bucket)
+        upload_file(tar_name,bucket,k)
