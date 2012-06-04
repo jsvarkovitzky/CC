@@ -340,8 +340,16 @@ def setgeo(rundata):
     # == setgauges.data values ==
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
-    if 0:
-        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
+    tidegauge_list = '/home/ubuntu/tidegauge_list.csv'
+    tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', names=True)
+    #Read through row wise in csv file to extract relavent geodata                                                                                            
+    for row in tidegauge_block:
+        print [row[0], row[1], row[2], row[3], row[4]]
+        geodata.regions.append([row[0], row[1], row[2], row[3], row[4]])
+
+
+#    if 0:
+#        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
 #        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
 #        geodata.gauges.append([197501, 235.81581, 41.745928, 33000., 1.e10]) ##tide gauge W
 
