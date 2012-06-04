@@ -328,28 +328,15 @@ def setgeo(rundata):
     geodata.regions = []
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
-    geodata.regions.append([1, 1, 0., 1e9, 0, 360, -90, 90])   # whole world
-    geodata.regions.append([3, 3, 0., 1800, 140, 146, 30, 42]) # source area
-    geodata.regions.append([3, 5, 0.*3600, 1e9, 230, 250, 22, 52]) # CA Coast 
-#    geodata.regions.append([3, 5, 0.*3600, 1e9, 235, 250, 22, 52]) # CA Coast 
-    geodata.regions.append([1, 3, 0, 7200, 140, 245, 25, 50]) 
-    geodata.regions.append([1, 3, 0, 15000, 155, 245, 25, 50]) 
-    geodata.regions.append([1, 3, 15000, 21000, 170, 245, 25, 50]) 
-    geodata.regions.append([1, 3, 21000, 27000, 180, 245, 25, 50]) 
-    geodata.regions.append([1, 3, 27000, 1e9, 200, 245, 25, 50]) 
-    geodata.regions.append([2, 4, 27000, 33000., 200, 245, 35, 43]) 
-    geodata.regions.append([2, 4, 33000, 1e9, 230, 236, 39, 42]) 
-    #geodata.regions.append([2, 4, 33000, 1e9, 228, 236, 39, 42]) 
-    #geodata.regions.append([2, 4, 33000, 1e9, 230, 245, 35, 43]) 
-    #geodata.regions.append([4, 4, 33000, 1e9, 235, 236, 41, 42]) 
+    georegion_list = '/home/ubuntu/georegion_list.csv'
+    georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', names=True)
+    #Read through row wise in csv file to extract relavent geodata
+    for row in topo_block:
+        fname = topodir + row[0]
+        print "The file being read in is %s." %fname
+        geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
-    geodata.regions.append([3, 4, 0., 1e9, 228, 238, 41, 42]) # between shelf and CC
-    geodata.regions.append([4, 4, 0., 1e9, 235, 236, 41, 42]) # CC region
-    geodata.regions.append([5, 5, 0., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
-#    geodata.regions.append([5, 5, 33000., 1e9, 235.5,235.83,41.6,41.8]) #only harbor 
-#    geodata.regions.append([6, 6, 35000., 1e9, 235.795116,235.826887,41.734963,41.752605]) #only harbor 
-#    geodata.regions.append([6, 6, 35000., 1e9, 235.78,235.826887,41.734963,41.752605]) #only harbor 
-    geodata.regions.append([6, 6, 0., 1e9, 235.77,235.84,41.73,41.79]) # fixed grid domain 
+
 
     # == setgauges.data values ==
     geodata.gauges = []
