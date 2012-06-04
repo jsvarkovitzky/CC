@@ -381,7 +381,7 @@ def setgeo(rundata):
     #Read through row wise in csv file to extract relavent geodata                                                                                            
     for row in fixedgrid_block:
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
-        geodata.gauges.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
+        geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
 
 
 
