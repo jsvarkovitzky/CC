@@ -331,7 +331,7 @@ def setgeo(rundata):
     georegion_list = '/home/ubuntu/georegion_list.csv'
     georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', names=True)
     #Read through row wise in csv file to extract relavent geodata
-    for row in topo_block:
+    for row in georegion_block:
         fname = topodir + row[0]
         print "The file being read in is %s." %fname
         geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
