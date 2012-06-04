@@ -59,8 +59,9 @@ def percent_cb(complete, total):
 ###########################
 
 def time_stamp_format(now):
-    timeStamp = str(now.year) + str('%02d'%now.month) + str('%02d'%now.day) + str('%02d'%now.hour) + str('%02d'%now.minute) + str('%02d'%now.second)    
+    timeStamp = str(now.year) + str('%02d'%now.month) + str('%02d'%now.day) + '_' + str('%02d'%now.hour) + str('%02d'%now.minute) + str('%02d'%now.second)    
     return timeStamp
+
 ##################
 ## Main Program ##
 ##################
