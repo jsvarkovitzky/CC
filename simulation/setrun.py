@@ -376,8 +376,17 @@ def setgeo(rundata):
     # for fixed grids append lines of the form
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
-    geodata.fixedgrids.append([0.0*3600.,0.1*3600., 7, 235.77,235.84,\
-       41.73,41.79,490,420,0,1])
+    fixedgrid_list = '/home/ubuntu/fixedgrid_list.csv'
+    fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', names=True)
+    #Read through row wise in csv file to extract relavent geodata                                                                                            
+    for row in fixedgrid_block:
+        print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
+        geodata.gauges.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
+
+
+
+#    geodata.fixedgrids.append([0.0*3600.,0.1*3600., 7, 235.77,235.84,\
+#       41.73,41.79,490,420,0,1])
 
 #    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
 #       41.735,41.755,434,217,0,1])
