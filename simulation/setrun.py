@@ -345,7 +345,7 @@ def setgeo(rundata):
     #Read through row wise in csv file to extract relavent geodata                                                                                            
     for row in tidegauge_block:
         print [row[0], row[1], row[2], row[3], row[4]]
-        geodata.regions.append([row[0], row[1], row[2], row[3], row[4]])
+        geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
 
 
 #    if 0:
