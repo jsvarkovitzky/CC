@@ -300,7 +300,7 @@ def setgeo(rundata):
 
     topodir = CCdir + '/topo/'
     topo_list = '/home/ubuntu/topo_list.csv'
-    topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True, skip_header = 1)
+    topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
     
     for row in topo_block:
@@ -330,7 +330,7 @@ def setgeo(rundata):
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     georegion_list = '/home/ubuntu/georegion_list.csv'
-    georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', names=True, skip_header = 1)
+    georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
     print "The georegions are:"
     for row in georegion_block:
@@ -343,7 +343,7 @@ def setgeo(rundata):
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     tidegauge_list = '/home/ubuntu/tidegauge_list.csv'
-    tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', names=True, skip_header = 1)
+    tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata                                                                                            
     print "The tidegauges are:"
     for row in tidegauge_block:
@@ -380,7 +380,7 @@ def setgeo(rundata):
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
     fixedgrid_list = '/home/ubuntu/fixedgrid_list.csv'
-    fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', names=True, skip_header = 1)
+    fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata                                                                                           
     print "The fixed grids are:"
     for row in fixedgrid_block:
