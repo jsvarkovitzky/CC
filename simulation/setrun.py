@@ -343,7 +343,7 @@ def setgeo(rundata):
             print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
             geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
     except:
-        row = georegion[()]
+        row = georegion_block[()]
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
         geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
 
@@ -360,7 +360,7 @@ def setgeo(rundata):
             print [row[0], row[1], row[2], row[3], row[4]]
             geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
     except:
-        row = tidegauge[()]
+        row = tidegauge_block[()]
         print [row[0], row[1], row[2], row[3], row[4]]
         geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
 
