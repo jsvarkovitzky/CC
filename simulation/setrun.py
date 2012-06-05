@@ -300,8 +300,9 @@ def setgeo(rundata):
 
     topodir = CCdir + '/topo/'
     topo_list = '/home/ubuntu/topo_list.csv'
-    topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
+    topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True, skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
+    
     for row in topo_block:
         fname = topodir + row[0]
         print "The file being read in is %s." %fname
@@ -329,8 +330,9 @@ def setgeo(rundata):
     # to specify regions of refinement append lines of the form
     #  [minlevel,maxlevel,t1,t2,x1,x2,y1,y2]
     georegion_list = '/home/ubuntu/georegion_list.csv'
-    georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', names=True)
+    georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', names=True, skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
+    print "The georegions are:"
     for row in georegion_block:
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
         geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
@@ -341,8 +343,9 @@ def setgeo(rundata):
     geodata.gauges = []
     # for gauges append lines of the form  [gaugeno, x, y, t1, t2]
     tidegauge_list = '/home/ubuntu/tidegauge_list.csv'
-    tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', names=True)
+    tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', names=True, skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata                                                                                            
+    print "The tidegauges are:"
     for row in tidegauge_block:
         print [row[0], row[1], row[2], row[3], row[4]]
         geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
@@ -377,8 +380,9 @@ def setgeo(rundata):
     # [t1,t2,noutput,x1,x2,y1,y2,xpoints,ypoints,\
     #  ioutarrivaltimes,ioutsurfacemax]
     fixedgrid_list = '/home/ubuntu/fixedgrid_list.csv'
-    fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', names=True)
-    #Read through row wise in csv file to extract relavent geodata                                                                                            
+    fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', names=True, skip_header = 1)
+    #Read through row wise in csv file to extract relavent geodata                                                                                           
+    print "The fixed grids are:"
     for row in fixedgrid_block:
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
         geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
