@@ -302,12 +302,17 @@ def setgeo(rundata):
     topo_list = '/home/ubuntu/topo_list.csv'
     topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
-    
-    for row in topo_block:
+
+    try:
+        for row in topo_block:
+            fname = topodir + row[0]
+            print "The file being read in is %s." %fname
+            geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], fname])
+    except:
+        row = topo_block[()]
         fname = topodir + row[0]
         print "The file being read in is %s." %fname
         geodata.topofiles.append([row[1], row[2], row[3], row[4], row[5], fname])
-    
 
     # Earthquake source:
     # == setdtopo.data values ==
@@ -333,10 +338,14 @@ def setgeo(rundata):
     georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
     print "The georegions are:"
-    for row in georegion_block:
+    try: 
+        for row in georegion_block:
+            print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
+            geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
+    except:
+        row = georegion[()]
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
         geodata.regions.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
-
 
 
     # == setgauges.data values ==
@@ -346,11 +355,16 @@ def setgeo(rundata):
     tidegauge_block =  genfromtxt(tidegauge_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata                                                                                            
     print "The tidegauges are:"
-    for row in tidegauge_block:
+    try:
+        for row in tidegauge_block:
+            print [row[0], row[1], row[2], row[3], row[4]]
+            geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
+    except:
+        row = tidegauge[()]
         print [row[0], row[1], row[2], row[3], row[4]]
         geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
 
-
+        
 #    if 0:
 #        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
 #        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
@@ -383,7 +397,12 @@ def setgeo(rundata):
     fixedgrid_block =  genfromtxt(fixedgrid_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata                                                                                           
     print "The fixed grids are:"
-    for row in fixedgrid_block:
+    try:
+        for row in fixedgrid_block:
+            print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
+            geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
+    except:
+        row = fixedgrid_block[()]
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
         geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
 
