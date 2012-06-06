@@ -1,6 +1,6 @@
-#Uploads final ouputs and plots to s3
-#Jonathan Varkovitzky
-#May 29, 2012
+# Compresses and uploads final ouputs and plots to s3
+# Jonathan Varkovitzky
+# May 29, 2012
 
 import boto
 import sys
@@ -23,10 +23,11 @@ def tar_dir(dir_name,now):
     print 'Compressing the %s directory.' %dir_name
     timeStamp = time_stamp_format(now)
     print "The timestamp is %s" %timeStamp
+    #Append the directory name with the specified timestamp
     tar_name = str(dir_name + '_' + timeStamp + '.tar')
-    #tar_name = str(dir_name + '.tar')
     os.system('tar -czf' + repr(tar_name) + ' ' + repr(dir_name))
     return tar_name
+
 ###########################
 ## Upload tar file to s3 ##
 ###########################
@@ -59,6 +60,7 @@ def percent_cb(complete, total):
 ###########################
 
 def time_stamp_format(now):
+    #Creates timestamp of the format yyyymmdd_hhmmss for appending to .tar file names
     timeStamp = str(now.year) + str('%02d'%now.month) + str('%02d'%now.day) + '_' + str('%02d'%now.hour) + str('%02d'%now.minute) + str('%02d'%now.second)    
     return timeStamp
 
@@ -70,11 +72,19 @@ def upload_results_s3(now):
     AWS_SECRET_ACCESS_KEY = keys.aws_key('secret')
         
     conn = boto.connect_s3(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY)
-        
+
+    #List of directories to be compressed then uploaded to s3
     dirName = ['_output','_plots']
     bucketName = [user.output_bucket,user.product_bucket]
-    for i in range(0,len(dirName)):
-        bucket = find_s3_bucket(conn, bucketName[i])
+    #Exception here to handle case of only one folder being uploaded
+    try:
+        for i in range(0,len(dirName)):
+            bucket = find_s3_bucket(conn, bucketName[i])
+            k = Key(bucket)
+            tar_name = tar_dir(dirName[i],now)
+            upload_file(tar_name,bucket,k)
+    except:
+        bucket = find_s3_bucket(conn, bucketName[0])
         k = Key(bucket)
-        tar_name = tar_dir(dirName[i],now)
+        tar_name = tar_dir(dirName[0],now)
         upload_file(tar_name,bucket,k)

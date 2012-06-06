@@ -1,4 +1,5 @@
-# This program tests the functionality of reading in csv files
+# Read in the provided Driver.csv file and assign the relavant values to objects 
+# That can be called later on by the simulation as needed.
 # Jonathan Varkovitzky
 # May 16, 2012
 
