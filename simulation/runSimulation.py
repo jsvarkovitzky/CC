@@ -15,9 +15,9 @@ now = datetime.datetime.now()
 # initialize rundata using setrun but then change some things for each run:     
 rundata = setrun()
 
-#Make sure that any erronious files are removed and beginssimulation
+#Make sure that any erronious files are removed and begins simulation
 os.system('make clean')
-os.system('make .plots')
+os.system('make .plots') #Parameters for a given run are set in setrun.pu
 
 #Compress and upload files using the timestamp created earlier
 upload_results_s3(now)

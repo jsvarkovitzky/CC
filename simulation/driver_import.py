@@ -22,7 +22,9 @@ class driver_info:
         self.t_start = driver_list[10]
         self.t_end = driver_list[11]
         self.n_out = driver_list[12]
-
-
+        self.xlower = driver_list[13]
+        self.xupper = driver_list[14]
+        self.ylower = driver_list[15]
+        self.yupper = driver_list[16]
 
 
