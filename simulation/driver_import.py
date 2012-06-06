@@ -19,7 +19,9 @@ class driver_info:
         self.topofile = driver_list[7]
         self.subdomain = driver_list[8]
         self.fg_file = driver_list[9]
-
+        self.t_start = driver_list[10]
+        self.t_end = driver_list[11]
+        self.n_out = driver_list[12]
 
 
 
