@@ -394,7 +394,7 @@ if __name__  == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
     import driver_import
-    driver = driver_import.driver_info(1)
+
     if len(sys.argv) == 2:
         rundata = setrun(sys.argv[1])
     else:
