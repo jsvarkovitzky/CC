@@ -13,6 +13,7 @@ import os, sys
 lib_path = os.path.abspath('../')
 sys.path.append(lib_path)
 import user_info_file
+user = user_info_file.user_info()
 
 sim_path = os.path.abspath('simulation')
 print sim_path
