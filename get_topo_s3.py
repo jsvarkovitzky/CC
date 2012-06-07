@@ -13,10 +13,13 @@ import os, sys
 lib_path = os.path.abspath('../')
 sys.path.append(lib_path)
 import user_info_file
-import driver_import
 
-user = user_info_file.user_info()
+sim_path = os.path.abspath('simulation')
+print sim_path
+sys.path.append(sim_path)
+import driver_import
 driver = driver_import.driver_info(1)
+
 
 ###########################
 ## Find Specified Bucket ##
