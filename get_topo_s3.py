@@ -15,6 +15,7 @@ sys.path.append(lib_path)
 import user_info_file
 
 user = user_info_file.user_info()
+driver = driver_import.driver_info(1)
 
 ###########################
 ## Find Specified Bucket ##
@@ -61,71 +62,20 @@ os.chdir(subdir)
 print "Downloading topo files to %r from AWS S3:"%subdir
 
 topo_list = '/home/ubuntu/topo_list.csv'
-topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',', names=True)
+topo_block =  genfromtxt(topo_list, dtype=None, delimiter=',')
 
 for row in topo_block:
     fname = row[0]
     download_file(fname,bucket_name)
-"""
-# Download etopo files into their directory
-fname = 'etopo1min139E147E34N41N.asc'
-download_file(fname,bucket_name)
 
-fname = 'etopo4min120E72W40S60N.asc'
-download_file(fname,bucket_name)
 
-# Download topo files into their directory
-subdir = 'topo/CC'
-os.chdir(CCdir)
-os.system('mkdir -p %s'%subdir)
-os.chdir(subdir)
-print "Downloading topo files to %r"%subdir
-fname = 'ca_north36secm.asc'
-download_file(fname,bucket_name)
-
-fname = 'cc-1sec-c.asc'
-download_file(fname,bucket_name)
-
-fname = 'cc-1_3sec-c.asc'
-download_file(fname,bucket_name)
-
-#fname = 'crescent_city_1-3_arc-second_mhw.asc'
-#download_file(fname,bucket_name)
-"""
-# Download dtopo files into their directory
-subdir ='dtopo/tohoku'
-os.chdir(CCdir)
-os.system('mkdir -p %s'%subdir)
-os.chdir(subdir)
-
-#Download Tohoku 2011 Source
-print "Downloading dtopo files to %r"%subdir
-fname = 'ucsb3-1min.tt1'
-download_file(fname,bucket_name)
-
-fname = 'fujii.txydz'
-download_file(fname,bucket_name)
-
-#Download CSZ01 Source
-subdir ='dtopo/CSZ'
+#Download driver.source from s3 to local dtopo directory
+subdir ='dtopo'
 os.chdir(CCdir)
 os.system('mkdir -p %s'%subdir)
 os.chdir(subdir)
 
 print "Downloading dtopo files to %r"%subdir
-fname = 'csz01.dtopo'
+fname = driver.source
 download_file(fname,bucket_name)
 
-
-
-##
-#topo_files = ([
-#        'etopo1min139E147E34N41N.asc',
-#        'etopo4min120E72W40S60N.asc',
-#        'ca_north36secm.asc',
-#        'cc-1sec-c.asc',
-#        'cc-1_3sec-c.asc'])#
-#
-#dtopo_files([
-#        'ucsb3-1min.tt1',
-#        'fujii.txydz'])
