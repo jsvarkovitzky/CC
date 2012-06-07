@@ -13,6 +13,7 @@ import os, sys
 lib_path = os.path.abspath('../')
 sys.path.append(lib_path)
 import user_info_file
+import driver_import
 
 user = user_info_file.user_info()
 driver = driver_import.driver_info(1)
