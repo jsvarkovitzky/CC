@@ -1,5 +1,6 @@
 """                                                                             
-Start simulation and 
+Runs simulation with 'make .plots' then uploads compressed results to s3
+using 'upload_results_s3.py' with unique timestamp
 """                                                                             
                                                                                 
 from setrun import setrun                                                       
