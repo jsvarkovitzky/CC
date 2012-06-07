@@ -82,12 +82,14 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.xupper = driver.xupper
 
     clawdata.ylower = driver.ylower
-    clawdata.yupper = driver.xupper
+    clawdata.yupper = driver.yupper
 
 
     # Number of grid cells:
+    # IMPORTANT: it is required that dx=dy so mx and my must be chosen accordingly
+    # dx = (xupper-xlower)/mx
     clawdata.mx = int(abs(driver.xupper-driver.xlower)/2)
-    clawdata.my = int(abs(driver.xupper-driver.xlower)/2)
+    clawdata.my = int(abs(driver.yupper-driver.ylower)/2)
 
 
     # ---------------
@@ -233,6 +235,7 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
+    # inratx = inraty is nessisary to keep grids square
     clawdata.inratx = driver.inratx
     clawdata.inraty = driver.inratx
     clawdata.inratt = [4,4,5,2,2]
