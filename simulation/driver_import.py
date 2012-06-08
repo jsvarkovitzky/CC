@@ -10,7 +10,7 @@ class driver_info:
     def __init__(self,runid):
         driver_file = '/home/ubuntu/Driver.csv'
         driver_block = genfromtxt(driver_file, dtype=None, delimiter=',', names=True)
-        driver_list = driver_block[runid-1]
+        driver_list = driver_block[()]
     
         self.runid = driver_list[0]
         self.source = driver_list[1]
