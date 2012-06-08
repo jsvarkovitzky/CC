@@ -319,7 +319,7 @@ def setgeo(rundata):
     geodata.dtopofiles = []
     # for moving topography, append lines of the form :   
     #    [minlevel, maxlevel, fname]
-    dtopodir = CCdir + '/dtopo/CSZ'
+    dtopodir = CCdir + '/dtopo'
     fname = dtopodir + '/' + driver.source
     print 'dtopo file: ',fname
     geodata.dtopofiles.append([1,3,3,fname])
