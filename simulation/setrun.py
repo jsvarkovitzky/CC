@@ -1,28 +1,28 @@
 """
+For Tohoku 2011 tsunami from source region to California.
+Run with this first and then restart using setrun2.py.
+
 Module to set up run time parameters for Clawpack.
 
 The values set in the function setrun are then written out to data files
 that will be read in by the Fortran code.
+
 """
 
-#Importing relavant libraries
 import os, sys
 from pyclaw import data
 import numpy as np
 import csv
 from numpy import genfromtxt
 
-#Import Driver File and User Info File
 lib_path = os.path.abspath('../../')
 sys.path.append(lib_path)
 import user_info_file
 import driver_import
 sim_path = os.path.abspath('CC/simulation')
 
-#Access unique user info and driver file info
 user = user_info_file.user_info()
 driver = driver_import.driver_info(1)
-
 # Top CC directory (should have subdirectories topo and dtopo):
 CCdir = os.path.abspath('..')
 
@@ -78,18 +78,16 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.ndim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.xlower = driver.xlower
-    clawdata.xupper = driver.xupper
+    clawdata.xlower = 220.
+    clawdata.xupper = 250.
 
-    clawdata.ylower = driver.ylower
-    clawdata.yupper = driver.yupper
+    clawdata.ylower = 22
+    clawdata.yupper = 52.
 
 
     # Number of grid cells:
-    # IMPORTANT: it is required that dx=dy so mx and my must be chosen accordingly
-    # dx = (xupper-xlower)/mx
-    clawdata.mx = int(abs(driver.xupper-driver.xlower)/2)
-    clawdata.my = int(abs(driver.yupper-driver.ylower)/2)
+    clawdata.mx = 15
+    clawdata.my = 15
 
 
     # ---------------
@@ -124,7 +122,7 @@ def setrun(claw_pkg='geoclaw'):
 
     clawdata.restart = False
 
-    clawdata.outstyle = 2
+    clawdata.outstyle = 1
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
@@ -134,7 +132,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
         from numpy import arange, linspace
-        clawdata.tout = list(linspace(driver.t_start,driver.t_end,driver.n_out))
+        clawdata.tout = list(linspace(3600*9,3600*12,40))
         clawdata.nout = len(clawdata.tout)
 
     elif clawdata.outstyle == 3:
@@ -235,9 +233,8 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    # inratx = inraty is nessisary to keep grids square
-    clawdata.inratx = driver.inratx
-    clawdata.inraty = driver.inratx
+    clawdata.inratx = [4,4,5,5,18]
+    clawdata.inraty = [4,4,5,5,18]
     clawdata.inratt = [4,4,5,2,2]
 
 
@@ -322,7 +319,7 @@ def setgeo(rundata):
     geodata.dtopofiles = []
     # for moving topography, append lines of the form :   
     #    [minlevel, maxlevel, fname]
-    dtopodir = CCdir + '/dtopo'
+    dtopodir = CCdir + '/dtopo/CSZ'
     fname = dtopodir + '/' + driver.source
     print 'dtopo file: ',fname
     geodata.dtopofiles.append([1,3,3,fname])
@@ -340,7 +337,7 @@ def setgeo(rundata):
     georegion_list = '/home/ubuntu/georegion_list.csv'
     georegion_block =  genfromtxt(georegion_list, dtype=None, delimiter=',', skip_header = 1)
     #Read through row wise in csv file to extract relavent geodata
-    print "The subdomains are:"
+    print "The georegions are:"
     try: 
         for row in georegion_block:
             print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]]
@@ -367,6 +364,29 @@ def setgeo(rundata):
         print [row[0], row[1], row[2], row[3], row[4]]
         geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
 
+        
+#    if 0:
+#        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
+#        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
+#        geodata.gauges.append([197501, 235.81581, 41.745928, 33000., 1.e10]) ##tide gauge W
+
+    # The next part set up ngauges gauges along a transect between 
+    # (x1,y1) and (x2,y2):
+
+    from numpy import linspace
+    ngauges = 0
+    if ngauges > 0:
+        sarray = linspace(0,1,ngauges)
+        x1 = 235
+        y1 = 37.
+        x2 = 235
+        y2 = 44.
+        dx = x2 - x1
+        dy = y2 - y1
+        for gaugeno in range(ngauges):
+            s = sarray[gaugeno]
+            geodata.gauges.append([gaugeno, x1+s*dx, y1+s*dy, 32000., 1.e10])
+
 
     # == setfixedgrids.data values ==
     geodata.fixedgrids = []
@@ -386,6 +406,13 @@ def setgeo(rundata):
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
         geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
 
+
+
+#    geodata.fixedgrids.append([0.0*3600.,0.1*3600., 7, 235.77,235.84,\
+#       41.73,41.79,490,420,0,1])
+
+#    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
+#       41.735,41.755,434,217,0,1])
     
 
     return rundata
@@ -397,7 +424,7 @@ if __name__  == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
     import driver_import
-
+    driver = driver_import.driver_info(1)
     if len(sys.argv) == 2:
         rundata = setrun(sys.argv[1])
     else:
