@@ -76,18 +76,18 @@ def setplot(plotdata):
         return i + 1
 
     for i in range(0,file_len(plot_list.csv)-1):
-        plot = plot_import.plot_info(i+1)
+        plot_settings = plot_import.plot_info(i+1)
         
         #-----------------------------------------
         # Set Figure Parameters
         #-----------------------------------------
-        plotfigure = plotdata.new_plotfigure(name=plot.name, figno=i)
+        plotfigure = plotdata.new_plotfigure(name=plot_settings.name, figno=i)
         plotfigure.kwargs = {'figsize': (16,4)}
         plotfigure.show = True
 
     # Set up for axes in this figure:
         plotaxes = plotfigure.new_plotaxes()
-        plotaxes.title = plot.title
+        plotaxes.title = plot_settings.title
         plotaxes.scaled = True
         
         def aa(current_data):
@@ -108,8 +108,8 @@ def setplot(plotdata):
                                       0.1: [1.0,0.5,0.5], \
                                       1.0: [1.0,0.0,0.0]})
         plotitem.imshow_cmap = my_cmap
-        plotitem.imshow_cmin = plot.cmin
-        plotitem.imshow_cmax = plot.cmax
+        plotitem.imshow_cmin = plot_settings.cmin
+        plotitem.imshow_cmax = plot_settings.cmax
         plotitem.add_colorbar = True
         plotitem.amr_gridlines_show = [0,0,0]
         plotitem.amr_gridedges_show = [1]
@@ -123,8 +123,8 @@ def setplot(plotdata):
         plotitem.add_colorbar = False
         plotitem.amr_gridlines_show = [0,0,0]
         plotitem.amr_gridedges_show = [0]
-        plotaxes.xlimits = [plot.xlower,plot.xupper] 
-        plotaxes.ylimits = [plot.ylower,plot.yupper]
+        plotaxes.xlimits = [plot_settings.xlower,plot_settings.xupper] 
+        plotaxes.ylimits = [plot_settings.ylower,plot_settings.yupper]
         #plotaxes.afteraxes = addgauges
         
         # Add contour lines of bathymetry:
