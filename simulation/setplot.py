@@ -25,6 +25,9 @@ except:
     print "Did not find setplotfg.py"
     setplotfg = None
 
+lib_path = os.path.abspath('../../')
+sys.path.append(lib_path)
+import plot_import
 
 
 
@@ -65,230 +68,88 @@ def setplot(plotdata):
         text(235.8,41.9,'Cr.City',color='w',fontsize=10)
     
 
-    #-----------------------------------------
-    # Figure for big area
-    #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='Pacific', figno=0)
-    plotfigure.kwargs = {'figsize': (16,4)}
-    plotfigure.show = True
+    # Calculate length of plot_list
+    def file_len(fname):
+        with open(fname) as f:
+            for i, l in enumerate(f):
+                pass
+        return i + 1
+
+    for i in range(0,file_len(plot_list.csv)-1):
+        plot = plot_import.plot_info(i+1)
+        
+        #-----------------------------------------
+        # Set Figure Parameters
+        #-----------------------------------------
+        plotfigure = plotdata.new_plotfigure(name=plot.name, figno=i)
+        plotfigure.kwargs = {'figsize': (16,4)}
+        plotfigure.show = True
 
     # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes()
-    plotaxes.title = 'Pacific'
-    plotaxes.scaled = True
-
-    def aa(current_data):
-        title_hours(current_data)
-        if 0:
-            from pylab import savefig
-            fname = 'pacific%s.png' % str(current_data.frameno).zfill(4)
+        plotaxes = plotfigure.new_plotaxes()
+        plotaxes.title = plot.title
+        plotaxes.scaled = True
+        
+        def aa(current_data):
+            title_hours(current_data)
+            if 0:
+                from pylab import savefig
+                fname = 'pacific%s.png' % str(current_data.frameno).zfill(4)
             savefig(fname)
             print 'Saved ',fname
-    plotaxes.afteraxes = aa
+        plotaxes.afteraxes = aa
 
-    # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.surface_or_depth
-    my_cmap = colormaps.make_colormap({-1.0: [0.0,0.0,1.0], \
+        # Water
+        plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+        plotitem.plot_var = geoplot.surface_or_depth
+        my_cmap = colormaps.make_colormap({-1.0: [0.0,0.0,1.0], \
                                      -0.1: [0.5,0.5,1.0], \
                                       0.0: [1.0,1.0,1.0], \
                                       0.1: [1.0,0.5,0.5], \
                                       1.0: [1.0,0.0,0.0]})
-    plotitem.imshow_cmap = my_cmap
-    plotitem.imshow_cmin = -0.3
-    plotitem.imshow_cmax = 0.3
-    plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
+        plotitem.imshow_cmap = my_cmap
+        plotitem.imshow_cmin = plot.cmin
+        plotitem.imshow_cmax = plot.cmax
+        plotitem.add_colorbar = True
+        plotitem.amr_gridlines_show = [0,0,0]
+        plotitem.amr_gridedges_show = [1]
 
-    # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.land
-    plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
-    plotitem.add_colorbar = False
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [0]
-    plotaxes.xlimits = [220,250] 
-    plotaxes.ylimits = [22,52]
-    #plotaxes.afteraxes = addgauges
-
-    # Add contour lines of bathymetry:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    #plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = linspace(-6000,0,7)
-    plotitem.amr_contour_colors = ['g']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,1,0]  # show contours only on finest level
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-
-    # Add contour lines of topography:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = arange(0., 11., 1.)
-    plotitem.amr_contour_colors = ['g']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,0,1]  # show contours only on finest level
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-
-    #-----------------------------------------
-    # Figure for zoom
-    #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='California', figno=10)
-    #plotfigure.show = False
-
-    # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes()
-    plotaxes.title = 'California'
-    plotaxes.scaled = True
-
-    # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.surface_or_depth
-    my_cmap = colormaps.make_colormap({-1.0: [0.0,0.0,1.0], \
-                                      -0.1: [0.5,0.5,1.0], \
-                                       0.0: [1.0,1.0,1.0], \
-                                       0.1: [1.0,0.5,0.5], \
-                                       1.0: [1.0,0.0,0.0]})
-    plotitem.imshow_cmap = my_cmap
-    plotitem.imshow_cmin = -3.0
-    plotitem.imshow_cmax = 3.0
-    plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [0]
-
-    # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.land
-    plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
-    plotitem.add_colorbar = False
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [0]
-    plotaxes.xlimits = [230,240] 
-    plotaxes.ylimits = [35,52]
-    def af(current_data):
-        from pylab import savefig,figure
-        figure(10)
-        plotcc(current_data)
-        title_hours(current_data)
-        addgauges(current_data)
-        if 0:
-            fname = '/Users/rjl/OUTPUT/Users/rjl/Dropbox/mygeo/CC/_plots/' +\
-               'california%s.png' % str(current_data.frameno).zfill(4)
-            savefig(fname)
-            print 'Saved ',fname
-
-    #plotdata.afterframe = af
-    plotaxes.afteraxes = af
-    
-    # Add contour lines of eta:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.plot_var = geoplot.surface
-    from numpy import arange, linspace
-    plotitem.contour_levels = linspace(-0.3,0.3,13)
-    plotitem.amr_contour_colors = ['k']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,1,0]  # AMR levels to show contours
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-    plotitem.show = False
-
-    # Add contour lines of bathymetry:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = linspace(-4500,0,10)
-    plotitem.amr_contour_colors = ['k']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,1,0]  # AMR levels to show contours
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-    plotitem.show = True
-
-    # Add contour lines of topography:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = arange(0., 11., 1.)
-    plotitem.amr_contour_colors = ['g']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,0,1]  # show contours only on finest level
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-    plotitem.show = False
- 
-    #-----------------------------------------
-    # Figure for zoom2
-    #-----------------------------------------
-    plotfigure = plotdata.new_plotfigure(name='Crescent City', figno=11)
-    plotfigure.show = False
-
-    # Set up for axes in this figure:
-    plotaxes = plotfigure.new_plotaxes()
-    plotaxes.title = 'Crescent City'
-    plotaxes.scaled = True
-
-    # Water
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.surface_or_depth
-    my_cmap = colormaps.make_colormap({-1.0: [0.0,0.0,1.0], \
-                                      -0.1: [0.5,0.5,1.0], \
-                                       0.0: [1.0,1.0,1.0], \
-                                       0.1: [1.0,0.5,0.5], \
-                                       1.0: [1.0,0.0,0.0]})
-    plotitem.imshow_cmap = my_cmap
-    plotitem.imshow_cmin = -1.0
-    plotitem.imshow_cmax = 1.0
-    plotitem.add_colorbar = True
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
-
-    # Land
-    plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
-    plotitem.plot_var = geoplot.land
-    plotitem.imshow_cmap = geoplot.land_colors
-    plotitem.imshow_cmin = 0.0
-    plotitem.imshow_cmax = 100.0
-    plotitem.add_colorbar = False
-    plotitem.amr_gridlines_show = [0,0,0]
-    plotitem.amr_gridedges_show = [1]
-    plotaxes.xlimits = [235.76,235.84] 
-    plotaxes.ylimits = [41.72,41.77]
-    plotaxes.afteraxes = addgauges
-
-    # Add contour lines of bathymetry:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = arange(-10., 0., 1.)
-    plotitem.amr_contour_colors = ['k']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,0,1]  # show contours only on finest level
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
-
-    # Add contour lines of topography:
-    plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
-    #plotitem.show = False
-    plotitem.plot_var = geoplot.topo
-    from numpy import arange, linspace
-    plotitem.contour_levels = arange(0., 11., 1.)
-    plotitem.amr_contour_colors = ['g']  # color on each level
-    plotitem.kwargs = {'linestyles':'solid'}
-    plotitem.amr_contour_show = [0,0,0,1]  # show contours only on finest level
-    plotitem.gridlines_show = 0
-    plotitem.gridedges_show = 0
- 
+        # Land
+        plotitem = plotaxes.new_plotitem(plot_type='2d_imshow')
+        plotitem.plot_var = geoplot.land
+        plotitem.imshow_cmap = geoplot.land_colors
+        plotitem.imshow_cmin = 0.0
+        plotitem.imshow_cmax = 100.0
+        plotitem.add_colorbar = False
+        plotitem.amr_gridlines_show = [0,0,0]
+        plotitem.amr_gridedges_show = [0]
+        plotaxes.xlimits = [plot.xlower,plot.xupper] 
+        plotaxes.ylimits = [plot.ylower,plot.yupper]
+        #plotaxes.afteraxes = addgauges
+        
+        # Add contour lines of bathymetry:
+        plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
+        #plotitem.show = False
+        plotitem.plot_var = geoplot.topo
+        from numpy import arange, linspace
+        plotitem.contour_levels = linspace(-6000,0,7)
+        plotitem.amr_contour_colors = ['g']  # color on each level
+        plotitem.kwargs = {'linestyles':'solid'}
+        plotitem.amr_contour_show = [0,0,1,0]  # show contours only on finest level
+        plotitem.gridlines_show = 0
+        plotitem.gridedges_show = 0
+        
+        # Add contour lines of topography:
+        plotitem = plotaxes.new_plotitem(plot_type='2d_contour')
+        plotitem.show = False
+        plotitem.plot_var = geoplot.topo
+        from numpy import arange, linspace
+        plotitem.contour_levels = arange(0., 11., 1.)
+        plotitem.amr_contour_colors = ['g']  # color on each level
+        plotitem.kwargs = {'linestyles':'solid'}
+        plotitem.amr_contour_show = [0,0,0,1]  # show contours only on finest level
+        plotitem.gridlines_show = 0
+        plotitem.gridedges_show = 0
 
     #-----------------------------------------
     # Figures for gauges
