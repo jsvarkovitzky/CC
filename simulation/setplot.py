@@ -13,6 +13,7 @@ from pyclaw.data import Data
 import pylab
 import glob
 from numpy import loadtxt
+import os, sys
 
 try:
     TG_19750 = loadtxt('../19750_notide.txt')
