@@ -26,5 +26,6 @@ class driver_info:
         self.xupper = driver_list[16]
         self.ylower = driver_list[17]
         self.yupper = driver_list[18]
-
+        self.mx = driver_list[19]
+        self.my = driver_list[20]
 
