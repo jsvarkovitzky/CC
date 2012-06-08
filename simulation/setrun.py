@@ -78,11 +78,11 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.ndim = ndim
 
     # Lower and upper edge of computational domain:
-    clawdata.xlower = 220.
-    clawdata.xupper = 250.
+    clawdata.xlower = driver.xlower
+    clawdata.xupper = driver.xupper
 
-    clawdata.ylower = 22
-    clawdata.yupper = 52.
+    clawdata.ylower = driver.ylower
+    clawdata.yupper = driver.yupper
 
 
     # Number of grid cells:
@@ -319,7 +319,7 @@ def setgeo(rundata):
     geodata.dtopofiles = []
     # for moving topography, append lines of the form :   
     #    [minlevel, maxlevel, fname]
-    dtopodir = CCdir + '/dtopo/CSZ'
+    dtopodir = CCdir + '/dtopo'
     fname = dtopodir + '/' + driver.source
     print 'dtopo file: ',fname
     geodata.dtopofiles.append([1,3,3,fname])
