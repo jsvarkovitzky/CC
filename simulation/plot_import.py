@@ -9,8 +9,8 @@ from numpy import *
 class plot_info:
     def __init__(self,plot_id):
         plot_file = '/home/ubuntu/plot_list.csv'
-        plot_block = genfromtxt(driver_file, dtype=None, delimiter=',', names=True)
-        plot_list = driver_block[plot_id-1]
+        plot_block = genfromtxt(plot_file, dtype=None, delimiter=',', names=True)
+        plot_list = plot_block[plot_id-1]
     
         self.name = plot_list[0]
 	self.title = plot_list[1]
