@@ -86,8 +86,12 @@ def setrun(claw_pkg='geoclaw'):
 
 
     # Number of grid cells:
-    clawdata.mx = 15
-    clawdata.my = 15
+    # Need to ensure that dx = dy = 2
+    # dx = (driver.xupper - driver.xlower)/driver.mx
+    # mx and my must be integers
+
+    clawdata.mx = driver.mx
+    clawdata.my = driver.my
 
 
     # ---------------
@@ -122,7 +126,7 @@ def setrun(claw_pkg='geoclaw'):
 
     clawdata.restart = False
 
-    clawdata.outstyle = 1
+    clawdata.outstyle = 2
 
     if clawdata.outstyle==1:
         # Output nout frames at equally spaced times up to tfinal:
@@ -132,7 +136,7 @@ def setrun(claw_pkg='geoclaw'):
     elif clawdata.outstyle == 2:
         # Specify a list of output times.
         from numpy import arange, linspace
-        clawdata.tout = list(linspace(3600*9,3600*12,40))
+        clawdata.tout = list(linspace(driver.t_start,driver.t_end,driver.n_out))
         clawdata.nout = len(clawdata.tout)
 
     elif clawdata.outstyle == 3:
@@ -233,8 +237,10 @@ def setrun(claw_pkg='geoclaw'):
     clawdata.mxnest = -mxnest   # negative ==> anisotropic refinement in x,y,t
 
     # List of refinement ratios at each level (length at least mxnest-1)
-    clawdata.inratx = [4,4,5,5,18]
-    clawdata.inraty = [4,4,5,5,18]
+    # refinement needs to be equal in both the x and y directions
+    
+    clawdata.inratx = driver.inratx
+    clawdata.inraty = driver.inratx
     clawdata.inratt = [4,4,5,2,2]
 
 
@@ -363,31 +369,6 @@ def setgeo(rundata):
         row = tidegauge_block[()]
         print [row[0], row[1], row[2], row[3], row[4]]
         geodata.gauges.append([row[0], row[1], row[2], row[3], row[4]])
-
-        
-#    if 0:
-#        geodata.gauges.append([00, 235.67, 41.73, 8*3600., 1.e10]) ##tide gauge E
-#        geodata.gauges.append([19750, 235.8162, 41.745616, 33000., 1.e10]) ##tide gauge E
-#        geodata.gauges.append([197501, 235.81581, 41.745928, 33000., 1.e10]) ##tide gauge W
-
-    # The next part set up ngauges gauges along a transect between 
-    # (x1,y1) and (x2,y2):
-
-    from numpy import linspace
-    ngauges = 0
-    if ngauges > 0:
-        sarray = linspace(0,1,ngauges)
-        x1 = 235
-        y1 = 37.
-        x2 = 235
-        y2 = 44.
-        dx = x2 - x1
-        dy = y2 - y1
-        for gaugeno in range(ngauges):
-            s = sarray[gaugeno]
-            geodata.gauges.append([gaugeno, x1+s*dx, y1+s*dy, 32000., 1.e10])
-
-
     # == setfixedgrids.data values ==
     geodata.fixedgrids = []
     # for fixed grids append lines of the form
@@ -406,15 +387,6 @@ def setgeo(rundata):
         print [row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]]
         geodata.fixedgrids.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10]])
 
-
-
-#    geodata.fixedgrids.append([0.0*3600.,0.1*3600., 7, 235.77,235.84,\
-#       41.73,41.79,490,420,0,1])
-
-#    geodata.fixedgrids.append([9.0*3600.,12.0*3600., 40, 235.78,235.82,\
-#       41.735,41.755,434,217,0,1])
-    
-
     return rundata
     # end of function setgeo
     # ----------------------
@@ -424,7 +396,7 @@ if __name__  == '__main__':
     # Set up run-time parameters and write all data files.
     import sys
     import driver_import
-    driver = driver_import.driver_info(1)
+
     if len(sys.argv) == 2:
         rundata = setrun(sys.argv[1])
     else:
